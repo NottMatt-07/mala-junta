@@ -1,0 +1,676 @@
+/* =====================================================================
+   MALA JUNTA — hoja de estilos
+   =====================================================================
+   Para cambiar el aspecto del sitio, en general alcanza con tocar
+   las VARIABLES de acá abajo. El resto del archivo las usa a todas,
+   así que un solo cambio se refleja en toda la página.
+   ===================================================================== */
+
+:root {
+  /* ---- Colores ------------------------------------------------------
+     Verde musgo y de bosque, barro cocido y crema: la paleta que pidió
+     el cliente, con los colores del horno de barro y la forestación. */
+  --color-musgo: #2f3b28;       /* verde musgo oscuro — header, inicio y contacto */
+  --color-bosque: #445939;      /* verde bosque — Nosotros y Reservas */
+  --color-brasa: #96502c;       /* barro cocido — acento principal y botones */
+  --color-barro-claro: #e0aa82; /* barro claro — acentos sobre fondos oscuros */
+  --color-humo: #2b211c;        /* marrón casi negro — texto y pie */
+  --color-masa: #efe6d8;        /* crema tipo masa cruda — fondo claro */
+  --color-cuero: #8b5e3c;       /* marrón cuero/madera — bordes y líneas */
+
+  --color-texto: var(--color-humo);
+  --color-texto-claro: #f6f1e8;
+
+  /* ---- Colores "por función" -----------------------------------------
+     Las secciones claras usan estos. El modo oscuro solo los redefine
+     (ver más abajo), así no hay que tocar cada sección. */
+  --fondo: var(--color-masa);            /* fondo de Menú, Galería y Eventos */
+  --acento-texto: var(--color-brasa);    /* subtítulos y detalles sobre el fondo */
+  --linea: var(--color-cuero);           /* líneas divisorias */
+  --marco-fotos: var(--color-humo);      /* borde de las fotos de la galería */
+
+  /* ---- Tipografías ---------------------------------------------------
+     Bitter (slab) para títulos: sólida, con carácter de cartel de
+     madera. Karla (sans) para el texto, para que se lea cómodo. */
+  --fuente-titulos: 'Bitter', Georgia, serif;
+  --fuente-texto: 'Karla', -apple-system, sans-serif;
+
+  /* ---- Espaciados ------------------------------------------------- */
+  --espacio-seccion: clamp(3rem, 6vw, 6rem);
+  --ancho-maximo: 1080px;
+  --radio-borde: 2px; /* casi sin curvas: onda rústica, no "app" */
+}
+
+/* ---- Modo oscuro -------------------------------------------------------
+   Se activa con el botón sol/luna (atributo data-tema en <html>).
+   La primera vez se usa la preferencia del sistema de la persona. */
+:root[data-tema="oscuro"] {
+  color-scheme: dark;
+  --color-musgo: #243020;
+  --color-bosque: #33442b;
+  --color-texto: #ece3d3;
+  --fondo: #1a2016;
+  --acento-texto: var(--color-barro-claro);
+  --linea: #5a4636;
+  --marco-fotos: #0e120c;
+}
+
+/* =====================================================================
+   BASE
+   ===================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  color: var(--color-texto);
+  background: var(--fondo);
+  line-height: 1.6;
+}
+
+/* Transición suave al cambiar de modo */
+body, header, section, footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.15;
+  margin: 0 0 0.6em 0;
+  color: var(--color-texto);
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
+h3 { font-size: 1.15rem; letter-spacing: 0.02em; }
+
+p {
+  margin: 0 0 1em 0;
+  max-width: 62ch; /* líneas cortas, más fáciles de leer */
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+/* Franja de contenido centrada, reutilizada por cada sección */
+section, footer {
+  padding: var(--espacio-seccion) 1.5rem;
+}
+
+section > *, footer > * {
+  max-width: var(--ancho-maximo);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento-texto);
+  outline-offset: 3px;
+}
+
+header :focus-visible,
+#inicio :focus-visible,
+#nosotros :focus-visible,
+#reservas :focus-visible,
+#contacto :focus-visible,
+footer :focus-visible {
+  outline-color: var(--color-barro-claro);
+}
+
+/* Que el header fijo no tape el título al navegar con el menú */
+section {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* =====================================================================
+   HEADER Y NAVEGACIÓN
+   ===================================================================== */
+
+header {
+  background: var(--color-musgo);
+  color: var(--color-texto-claro);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 3px solid var(--color-brasa);
+}
+
+/* Título a la izquierda, links a la derecha, en una sola línea */
+.header-contenido {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+header h1 {
+  color: var(--color-texto-claro);
+  font-size: 1.4rem;
+  margin: 0 auto 0 0; /* empuja todo lo demás a la derecha */
+}
+
+/* Orden en pantalla: título | links | sol/luna | hamburguesa */
+nav { order: 1; }
+.tema-toggle { order: 2; }
+.menu-toggle { order: 3; }
+
+/* ---- Botón sol / luna -------------------------------------------- */
+.tema-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  color: var(--color-texto-claro);
+  border: 2px solid rgba(246, 241, 232, 0.35);
+  border-radius: var(--radio-borde);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.tema-toggle:hover {
+  border-color: var(--color-barro-claro);
+  color: var(--color-barro-claro);
+}
+
+.tema-toggle svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+/* Modo claro muestra la luna (para pasar a oscuro); modo oscuro, el sol */
+.tema-toggle .icono-sol { display: none; }
+[data-tema="oscuro"] .tema-toggle .icono-sol { display: block; }
+[data-tema="oscuro"] .tema-toggle .icono-luna { display: none; }
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 0.2em;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  border-color: var(--color-barro-claro);
+}
+
+/* ---- Botón hamburguesa (solo en pantallas chicas) ---------------- */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  color: var(--color-texto-claro);
+  border: 2px solid rgba(246, 241, 232, 0.35);
+  border-radius: var(--radio-borde);
+  cursor: pointer;
+}
+
+/* Las 3 rayitas: el span es la del medio, ::before y ::after las otras */
+.menu-toggle-icono,
+.menu-toggle-icono::before,
+.menu-toggle-icono::after {
+  display: block;
+  width: 1.25rem;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-toggle-icono { position: relative; }
+
+.menu-toggle-icono::before,
+.menu-toggle-icono::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-toggle-icono::before { top: -6px; }
+.menu-toggle-icono::after  { top: 6px; }
+
+/* Abierto: las rayitas forman una X */
+header.menu-abierto .menu-toggle-icono { background: transparent; }
+header.menu-abierto .menu-toggle-icono::before { top: 0; transform: rotate(45deg); }
+header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45deg); }
+
+@media (max-width: 700px) {
+  /* Solo si hay JavaScript: sin JS, los links se siguen viendo normal */
+  .js .menu-toggle { display: flex; }
+  .js nav { display: none; width: 100%; order: 4; } /* abajo de todo, ancho completo */
+  .js header.menu-abierto nav { display: block; }
+
+  .js nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  .js nav a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(246, 241, 232, 0.12);
+  }
+}
+
+/* =====================================================================
+   INICIO (HERO)
+   ===================================================================== */
+
+#inicio {
+  /* Foto del horno con una capa oscura encima para que el texto se lea */
+  background:
+    linear-gradient(rgba(24, 32, 20, 0.55), rgba(24, 32, 20, 0.82)),
+    url("foto3.jpg") center / cover no-repeat;
+  color: var(--color-texto-claro);
+  text-align: center;
+  padding-top: clamp(5rem, 14vw, 10rem);
+  padding-bottom: clamp(5rem, 14vw, 10rem);
+}
+
+#inicio h2 {
+  color: var(--color-texto-claro);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+}
+
+#inicio p {
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: var(--color-masa);
+}
+
+#inicio .inicio-bajada {
+  font-family: var(--fuente-titulos);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-barro-claro);
+  margin-bottom: 1rem;
+}
+
+/* ---- Botón de reserva (se usa en Inicio y Contacto) -------------- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: 1.8rem;
+  padding: 0.85em 1.5em;
+  background: var(--color-brasa);
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radio-borde);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.boton:hover {
+  background: #7a4024;
+  transform: translateY(-1px);
+}
+
+/* Variante clara, para fondos verdes */
+.boton-claro {
+  background: var(--color-masa);
+  color: var(--color-musgo);
+}
+
+.boton-claro:hover {
+  background: #fff;
+}
+
+.boton svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+
+/* =====================================================================
+   MENÚ
+   ===================================================================== */
+
+#menu {
+  background: var(--fondo);
+}
+
+#menu h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#menu > div {
+  border-top: 1px solid var(--linea);
+  padding: 1.5rem 0;
+}
+
+#menu > div:last-of-type {
+  border-bottom: 1px solid var(--linea);
+}
+
+#menu h3 {
+  color: var(--acento-texto);
+  text-transform: lowercase;
+}
+
+#menu p {
+  max-width: none;
+}
+
+/* =====================================================================
+   NOSOTROS
+   ===================================================================== */
+
+#nosotros {
+  background: var(--color-bosque);
+  color: var(--color-texto-claro);
+}
+
+#nosotros h2,
+#nosotros h3 {
+  color: var(--color-texto-claro);
+}
+
+#nosotros ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+#nosotros li {
+  padding-left: 1.4em;
+  position: relative;
+}
+
+#nosotros li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-barro-claro);
+}
+
+/* =====================================================================
+   GALERÍA
+   ===================================================================== */
+
+#galeria {
+  background: var(--fondo);
+}
+
+#galeria h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Tira de fotos que se desliza en loop ------------------------
+   El JavaScript duplica las fotos; la animación mueve la tira la mitad
+   de su ancho y vuelve a empezar sin que se note el corte. */
+.tira {
+  max-width: none;
+  margin-left: -1.5rem;   /* ocupa todo el ancho de la pantalla */
+  margin-right: -1.5rem;
+  overflow: hidden;
+  /* bordes que se desvanecen a los costados */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.tira-pista {
+  display: flex;
+  width: max-content;
+  animation: deslizar var(--duracion, 40s) linear infinite;
+}
+
+.tira:hover .tira-pista {
+  animation-play-state: paused;
+}
+
+.tira-pista img {
+  flex: none;
+  height: clamp(200px, 24vw, 300px);
+  width: auto;
+  max-width: none;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-right: 1rem; /* margen y no "gap": así las dos mitades miden exacto lo mismo */
+  border: 3px solid var(--marco-fotos);
+}
+
+@keyframes deslizar {
+  to { transform: translateX(-50%); }
+}
+
+/* Si la persona pidió menos animaciones: tira quieta, se desliza a mano */
+@media (prefers-reduced-motion: reduce) {
+  .tira-pista { animation: none; }
+  .tira {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* =====================================================================
+   RESERVAS
+   ===================================================================== */
+
+#reservas {
+  background: var(--color-bosque);
+  color: var(--color-texto-claro);
+}
+
+#reservas h2 {
+  color: var(--color-texto-claro);
+}
+
+.form-reserva {
+  display: grid;
+  gap: 1.1rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .form-reserva { grid-template-columns: 1fr 1fr; }
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.campo-ancho {
+  grid-column: 1 / -1;
+}
+
+.form-reserva label {
+  font-weight: 700;
+}
+
+.form-reserva .opcional {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.form-reserva input,
+.form-reserva textarea {
+  font: inherit;
+  color: var(--color-humo);
+  background: #fbf8f2;
+  border: 2px solid transparent;
+  border-radius: var(--radio-borde);
+  padding: 0.65em 0.8em;
+  width: 100%;
+}
+
+.form-reserva input:focus,
+.form-reserva textarea:focus {
+  border-color: var(--color-barro-claro);
+}
+
+.form-reserva textarea {
+  resize: vertical;
+}
+
+.form-reserva .ayuda {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.form-reserva .boton {
+  margin-top: 0.25rem;
+}
+
+.form-error {
+  margin: 0;
+  color: #ffd2b8;
+  font-weight: 700;
+}
+
+.form-error:empty {
+  display: none;
+}
+
+#reservas .nota {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* =====================================================================
+   EVENTOS
+   ===================================================================== */
+
+#eventos {
+  background: var(--fondo);
+}
+
+#eventos ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 auto 1.2rem;
+}
+
+#eventos li {
+  padding-left: 1.4em;
+  position: relative;
+}
+
+#eventos li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--acento-texto);
+}
+
+/* =====================================================================
+   CONTACTO
+   ===================================================================== */
+
+#contacto {
+  background: var(--color-musgo);
+  color: var(--color-texto-claro);
+}
+
+#contacto h2,
+#contacto h3 {
+  color: var(--color-texto-claro);
+}
+
+#contacto h3 {
+  color: var(--color-barro-claro);
+  margin-top: 1.2em;
+}
+
+#contacto h3:first-of-type {
+  margin-top: 0;
+}
+
+#contacto a:not(.boton) {
+  text-decoration-color: var(--color-barro-claro);
+  text-underline-offset: 0.2em;
+}
+
+/* Datos a la izquierda, mapa a la derecha (abajo en celular) */
+.contacto-grilla {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .contacto-grilla { grid-template-columns: 1fr 1fr; }
+}
+
+.mapa {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 3px solid var(--color-cuero);
+  display: block;
+}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+
+footer {
+  background: var(--color-humo);
+  color: var(--color-texto-claro);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin-bottom: 0.4em;
+}
+
+footer a {
+  text-underline-offset: 0.2em;
+}

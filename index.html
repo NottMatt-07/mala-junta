@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mala Junta — Cocina y fuegos</title>
+    <meta name="description" content="Mala Junta: cocina y fuegos en San Martín de los Andes. Carnes al horno de barro y a la parrilla, con reserva previa.">
+    <meta name="theme-color" content="#2f3b28">
+
+    <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mala Junta — Cocina y fuegos">
+    <meta property="og:description" content="Carnes al horno de barro y a la parrilla en San Martín de los Andes. Reservas por WhatsApp.">
+    <!-- TODO: cuando haya dominio, poner la URL completa (ej: https://malajunta.com.ar/foto3.jpg).
+         WhatsApp y Facebook no leen rutas relativas. -->
+    <meta property="og:image" content="foto3.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%232f3b28'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23e0aa82'%3EMJ%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+    <script>
+        // Va en el <head> para aplicar el tema antes de dibujar la página (sin "parpadeo")
+        document.documentElement.classList.add('js');
+        (function () {
+            let tema = null;
+            try { tema = localStorage.getItem('tema'); } catch (e) {}
+            if (!tema) tema = matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro';
+            document.documentElement.dataset.tema = tema;
+        })();
+    </script>
+</head>
+<body>
+    <!-- TODO WHATSAPP: el número de ejemplo 5490000000000 aparece en este archivo
+         (links y constante WHATSAPP del script). Buscar y reemplazar todos por el real:
+         549 + característica sin 0 + número sin 15. Ej: 5492972123456 -->
+    <header>
+        <div class="header-contenido">
+            <h1>Mala Junta</h1>
+            <button class="tema-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false">
+                <svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                <svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+            </button>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">
+                <span class="menu-toggle-icono" aria-hidden="true"></span>
+            </button>
+            <nav id="nav-principal">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#reservas">Reservas</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio">
+        <p class="inicio-bajada">Cocina y fuegos · San Martín de los Andes</p>
+        <h2>Horno de barro y parrilla</h2>
+        <p>Cocina patagónica a la leña, con reserva previa.</p>
+        <a class="boton" href="#reservas">Reservá tu mesa</a>
+    </section>
+
+    <section id="menu">
+        <h2>Menú</h2>
+        <div>
+            <h3>platos principales</h3>
+            <p>descripcion</p>
+            <p>precio ejemplo</p>
+        </div>
+        <div>
+            <h3>postres</h3>
+            <p>descripcion</p>
+            <p>precio ejemplo</p>
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <h2>Nosotros</h2>
+        <h3>¿Quiénes Somos?</h3>
+        <p>Restaurante patagónico de cocina a la leña: casi todo lo que servimos pasa por el horno de barro o la parrilla. Un lugar chico e íntimo, con capacidad para 25 personas.</p>
+        <p>Reserva previa con 24 horas de anticipación. Pago en efectivo o transferencia bancaria.</p>
+        <h3>Lo que vas a encontrar</h3>
+        <ul>
+            <li>Carnes al horno de barro y a la parrilla</li>
+            <li>Postres tradicionales</li>
+            <li>Opciones para restricciones alimentarias (consultanos)</li>
+            <li>La bodega: un espacio más privado, sin costo extra</li>
+        </ul>
+        <h3>Cabañas Chapapituca</h3>
+        <p>Junto a las cabañas <a href="https://www.instagram.com/chapapituca/" target="_blank" rel="noopener">@chapapituca</a>.</p>
+    </section>
+
+    <section id="galeria">
+        <h2>Galería</h2>
+        <div class="tira" role="region" aria-label="Fotos de Mala Junta">
+            <!-- Para sumar fotos: agregar otro <img> dentro de .tira-pista. El loop se arma solo. -->
+            <div class="tira-pista">
+                <img src="foto3.jpg" alt="Carne asándose en el horno de barro">
+                <img src="foto4.jpg" alt="Cazuela gratinada servida en plato de loza">
+                <img src="foto1.jpg" alt="Galpón con el horno de barro humeando">
+                <img src="foto5.jpg" alt="Carne a la parrilla en fuente de madera, con ensalada">
+                <img src="foto2.jpg" alt="Mesa puesta con copas y pan casero">
+                <img src="foto6.jpg" alt="Bife a la parrilla con ensalada sobre tabla de madera">
+                <img src="foto7.jpg" alt="Postre de chocolate con helado y salsa de frutos rojos">
+            </div>
+        </div>
+    </section>
+
+    <section id="reservas">
+        <h2>Reservas</h2>
+        <p>Completá tus datos y se abre WhatsApp con el mensaje listo para enviar. Reservamos con al menos 24 horas de anticipación.</p>
+        <form class="form-reserva" novalidate>
+            <div class="campo">
+                <label for="res-nombre">Nombre de la reserva</label>
+                <input id="res-nombre" name="nombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="campo">
+                <label for="res-personas">Cantidad de personas</label>
+                <input id="res-personas" name="personas" type="number" min="1" max="25" value="2" required>
+            </div>
+            <div class="campo">
+                <label for="res-fecha">Fecha</label>
+                <input id="res-fecha" name="fecha" type="date" required aria-describedby="res-fecha-ayuda">
+                <span class="ayuda" id="res-fecha-ayuda">Jueves, viernes y sábado a la noche · Domingo al mediodía</span>
+            </div>
+            <div class="campo">
+                <label for="res-menu">Menú elegido</label>
+                <input id="res-menu" name="menu" type="text" aria-describedby="res-menu-ayuda">
+                <span class="ayuda" id="res-menu-ayuda">¿No tenés la carta? Dejalo vacío y te la mandamos por WhatsApp.</span>
+            </div>
+            <div class="campo campo-ancho">
+                <label for="res-comentarios">Comentarios <span class="opcional">(opcional)</span></label>
+                <textarea id="res-comentarios" name="comentarios" rows="3" placeholder="Restricciones alimentarias, si preferís la bodega, etc."></textarea>
+            </div>
+            <p class="form-error campo-ancho" role="alert"></p>
+            <div class="campo-ancho">
+                <button class="boton boton-claro" type="submit">Enviar reserva por WhatsApp</button>
+            </div>
+        </form>
+        <p class="nota">Sin reserva te recibimos si hay lugar, pero siempre tienen prioridad las reservas.</p>
+    </section>
+
+    <section id="eventos">
+        <h2>Eventos</h2>
+        <p>¿Un agasajo, una reunión de empresa o un cumpleaños? Lo organizamos a medida en nuestro espacio.</p>
+        <ul>
+            <li>Agasajos y festejos</li>
+            <li>Reuniones empresariales</li>
+            <li>Cumpleaños (no realizamos fiestas de 15)</li>
+        </ul>
+        <p>Para eventos pedimos al menos una semana de anticipación. Escribinos y lo coordinamos directamente.</p>
+        <div>
+            <a class="boton" href="https://wa.me/5490000000000?text=Hola!%20Quiero%20consultar%20por%20un%20evento%20en%20Mala%20Junta" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                Consultar por un evento
+            </a>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contacto-grilla">
+            <div>
+                <h3>Ubicación</h3>
+                <!-- TODO: dirección real (también en el link y en el mapa de abajo) -->
+                <p><a href="https://www.google.com/maps/search/?api=1&query=San%20Mart%C3%ADn%20de%20los%20Andes%2C%20Neuqu%C3%A9n" target="_blank" rel="noopener">Calle Principal 123, Ciudad</a></p>
+                <h3>Teléfono</h3>
+                <!-- TODO: teléfono real -->
+                <p><a href="tel:+541123456789">+54 11 2345-6789</a></p>
+                <h3>Horario</h3>
+                <p>Jueves, viernes y sábado: 19:30 a 01:00</p>
+                <!-- TODO: confirmar horario del domingo -->
+                <p>Domingo: al mediodía</p>
+                <h3>Redes</h3>
+                <p><a href="https://www.instagram.com/malajunta.cocina/" target="_blank" rel="noopener">Instagram @malajunta.cocina</a></p>
+                <a class="boton boton-claro" href="https://wa.me/5490000000000?text=Hola!" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                    Escribinos por WhatsApp
+                </a>
+            </div>
+            <!-- TODO: cuando esté la dirección, cambiar el q= por la dirección exacta -->
+            <iframe class="mapa" title="Mapa de ubicación de Mala Junta"
+                src="https://www.google.com/maps?q=San%20Mart%C3%ADn%20de%20los%20Andes%2C%20Neuqu%C3%A9n&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mala Junta. Todos los derechos reservados.</p>
+        <p><a href="https://www.instagram.com/malajunta.cocina/" target="_blank" rel="noopener">@malajunta.cocina</a></p>
+    </footer>
+
+    <script>
+        const WHATSAPP = '5490000000000'; // TODO: número real de reservas
+
+        // ---------- Menú hamburguesa (solo se ve en pantallas chicas) ----------
+        const header = document.querySelector('header');
+        const botonMenu = document.querySelector('.menu-toggle');
+
+        function setMenu(abierto) {
+            header.classList.toggle('menu-abierto', abierto);
+            botonMenu.setAttribute('aria-expanded', abierto);
+            botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+        }
+
+        botonMenu.addEventListener('click', () => setMenu(!header.classList.contains('menu-abierto')));
+        document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+        // ---------- Modo claro / oscuro ----------
+        const botonTema = document.querySelector('.tema-toggle');
+
+        function aplicarTema(tema) {
+            document.documentElement.dataset.tema = tema;
+            const oscuro = tema === 'oscuro';
+            botonTema.setAttribute('aria-pressed', oscuro);
+            botonTema.setAttribute('aria-label', oscuro ? 'Activar modo claro' : 'Activar modo oscuro');
+        }
+
+        aplicarTema(document.documentElement.dataset.tema);
+        botonTema.addEventListener('click', () => {
+            const nuevo = document.documentElement.dataset.tema === 'oscuro' ? 'claro' : 'oscuro';
+            aplicarTema(nuevo);
+            try { localStorage.setItem('tema', nuevo); } catch (e) {} // recordar la elección
+        });
+
+        // ---------- Galería: tira de fotos que se desliza en loop ----------
+        // Duplica las fotos para que la tira no tenga cortes: cuando la primera
+        // mitad termina de pasar, la animación vuelve al inicio y no se nota.
+        const tira = document.querySelector('.tira');
+        const pista = tira.querySelector('.tira-pista');
+        const fotosOriginales = [...pista.children];
+        const VELOCIDAD = 35; // píxeles por segundo: más bajo = más lento
+
+        function clonarFoto(img) {
+            const copia = img.cloneNode();
+            copia.alt = '';                          // las copias no se leen dos veces
+            copia.setAttribute('aria-hidden', 'true');
+            return copia;
+        }
+
+        function armarTira() {
+            pista.replaceChildren(...fotosOriginales);
+            const anchoFotos = pista.getBoundingClientRect().width;
+            if (!anchoFotos) return;
+            // Repetir hasta cubrir el ancho de la pantalla, y después duplicar todo
+            const repeticiones = Math.max(1, Math.ceil(tira.clientWidth / anchoFotos));
+            const mitad = [];
+            for (let r = 0; r < repeticiones; r++) {
+                fotosOriginales.forEach(img => mitad.push(r === 0 ? img : clonarFoto(img)));
+            }
+            pista.replaceChildren(...mitad, ...mitad.map(clonarFoto));
+            pista.style.setProperty('--duracion', `${(anchoFotos * repeticiones) / VELOCIDAD}s`);
+        }
+
+        armarTira();
+        let anchoAnterior = tira.clientWidth;
+        let esperaResize;
+        window.addEventListener('resize', () => {
+            clearTimeout(esperaResize);
+            esperaResize = setTimeout(() => {
+                if (tira.clientWidth !== anchoAnterior) { anchoAnterior = tira.clientWidth; armarTira(); }
+            }, 200);
+        });
+
+        // ---------- Formulario de reserva → WhatsApp ----------
+        const form = document.querySelector('.form-reserva');
+        const campoFecha = form.elements.fecha;
+        const errorForm = form.querySelector('.form-error');
+        const DIAS_ABIERTO = [0, 4, 5, 6]; // domingo, jueves, viernes, sábado
+
+        // "YYYY-MM-DD" → Date en hora local (new Date("2026-10-01") la toma como UTC y corre el día)
+        function leerFecha(valor) {
+            const [a, m, d] = valor.split('-').map(Number);
+            return new Date(a, m - 1, d);
+        }
+        function aTextoInput(fecha) {
+            const m = String(fecha.getMonth() + 1).padStart(2, '0');
+            const d = String(fecha.getDate()).padStart(2, '0');
+            return `${fecha.getFullYear()}-${m}-${d}`;
+        }
+
+        // 24 h de anticipación: como mínimo, mañana
+        const manana = new Date();
+        manana.setDate(manana.getDate() + 1);
+        campoFecha.min = aTextoInput(manana);
+
+        function validar() {
+            const f = form.elements;
+            if (!f.nombre.value.trim()) return ['Poné el nombre de la reserva.', f.nombre];
+            const personas = Number(f.personas.value);
+            if (!Number.isInteger(personas) || personas < 1) return ['Indicá cuántas personas son.', f.personas];
+            if (personas > 25) return ['Para más de 25 personas, escribinos desde la sección Eventos.', f.personas];
+            if (!campoFecha.value) return ['Elegí una fecha.', campoFecha];
+            const fecha = leerFecha(campoFecha.value);
+            if (campoFecha.value < campoFecha.min) return ['Las reservas se hacen con al menos 24 horas de anticipación.', campoFecha];
+            if (!DIAS_ABIERTO.includes(fecha.getDay())) return ['Ese día está cerrado. Abrimos de jueves a domingo.', campoFecha];
+            return null;
+        }
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const error = validar();
+            if (error) {
+                errorForm.textContent = error[0];
+                error[1].focus();
+                return;
+            }
+            errorForm.textContent = '';
+
+            const f = form.elements;
+            const fechaTexto = leerFecha(campoFecha.value)
+                .toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+            const lineas = [
+                'Hola! Quiero hacer una reserva en Mala Junta.',
+                `Nombre: ${f.nombre.value.trim()}`,
+                `Fecha: ${fechaTexto}`,
+                `Personas: ${f.personas.value}`,
+                `Menú: ${f.menu.value.trim() || 'Me gustaría recibir la carta'}`,
+            ];
+            if (f.comentarios.value.trim()) lineas.push(`Comentarios: ${f.comentarios.value.trim()}`);
+
+            const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lineas.join('\n'))}`;
+            window.open(url, '_blank', 'noopener');
+        });
+    </script>
+</body>
+</html>
