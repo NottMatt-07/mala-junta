@@ -33,10 +33,10 @@
     </script>
 </head>
 <body>
-    <!-- TODO WHATSAPP: el número de ejemplo 5490000000000 aparece en este archivo
+    <!-- TODO WHATSAPP: el número de ejemplo 5490000000000 aparece en este archivo (5 veces)
          (links y constante WHATSAPP del script). Buscar y reemplazar todos por el real:
          549 + característica sin 0 + número sin 15. Ej: 5492972123456 -->
-    <a class="saltar" href="#carta">Saltar al contenido</a>
+    <a class="saltar" href="#platos">Saltar al contenido</a>
 
     <header>
         <div class="header-contenido">
@@ -50,7 +50,7 @@
             </button>
             <nav id="nav-principal">
                 <ul>
-                    <li><a href="#carta">Carta</a></li>
+                    <li><a href="#platos">Platos</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#galeria">Galería</a></li>
                     <li><a href="#reservas">Reservas</a></li>
@@ -69,7 +69,7 @@
             <p>Carnes al horno de barro y a la parrilla, en un salón chico para 25 personas. Se come con reserva.</p>
             <div class="inicio-acciones">
                 <a class="boton" href="#reservas">Reservá tu mesa</a>
-                <a class="boton boton-linea" href="#carta">Ver la carta</a>
+                <a class="boton boton-linea" href="#platos">Platos de la casa</a>
             </div>
             <p class="inicio-horario">Abrimos jueves, viernes y sábado a la noche, y domingo al mediodía.</p>
         </div>
@@ -79,20 +79,21 @@
         </figure>
     </section>
 
-    <section id="carta">
+    <section id="platos">
         <div class="seccion-cabeza">
-            <h2>La carta</h2>
-            <p>Te mandamos la carta completa por WhatsApp cuando reservás. Estos son algunos de los platos que más se piden.</p>
+            <h2>Platos de la casa</h2>
+            <p>Algunos de los platos que más se piden. La carta completa te la mandamos por WhatsApp.</p>
         </div>
         <!-- TODO: platos tomados de reseñas de TripAdvisor. Reemplazar con la carta real de Juan. -->
         <ul class="platos">
-            <li><span class="plato">Cordero patagónico</span><span class="plato-detalle">al horno de barro</span></li>
-            <li><span class="plato">Bondiola braseada</span><span class="plato-detalle">cocción lenta</span></li>
-            <li><span class="plato">Vacío</span><span class="plato-detalle">a la parrilla</span></li>
-            <li><span class="plato">Ojo de bife</span><span class="plato-detalle">a la parrilla</span></li>
-            <li><span class="plato">Matambre de cerdo</span><span class="plato-detalle">a la leña</span></li>
-            <li><span class="plato">Postres tradicionales</span><span class="plato-detalle">caseros</span></li>
+            <li>Cordero patagónico al horno de barro</li>
+            <li>Bondiola braseada</li>
+            <li>Vacío</li>
+            <li>Ojo de bife</li>
+            <li>Matambre de cerdo</li>
+            <li>Postres tradicionales</li>
         </ul>
+        <a class="boton boton-secundario" href="https://wa.me/5490000000000?text=Hola!%20Me%20pasar%C3%ADan%20la%20carta%3F" target="_blank" rel="noopener">Pedir la carta por WhatsApp</a>
     </section>
 
     <section id="nosotros">
@@ -110,7 +111,14 @@
     </section>
 
     <section id="galeria">
-        <h2>Galería</h2>
+        <div class="galeria-cabeza">
+            <h2>Galería</h2>
+        <button class="tira-pausa" type="button" aria-pressed="false">
+            <svg class="icono-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+            <svg class="icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+            <span>Pausar fotos</span>
+        </button>
+        </div>
         <div class="tira" role="region" aria-label="Fotos de Mala Junta">
             <!-- Para sumar fotos: agregar otro <img> dentro de .tira-pista. El loop se arma solo. -->
             <div class="tira-pista">
@@ -141,8 +149,9 @@
             </div>
             <div class="campo">
                 <label for="res-fecha">Fecha</label>
-                <input id="res-fecha" name="fecha" type="date" required aria-describedby="res-fecha-ayuda">
+                <input id="res-fecha" name="fecha" type="date" required aria-describedby="res-fecha-ayuda res-fecha-error">
                 <span class="ayuda" id="res-fecha-ayuda">Jueves a sábado a la noche, domingo al mediodía</span>
+                <span class="campo-error" id="res-fecha-error" role="alert"></span>
             </div>
             <div class="campo">
                 <label for="res-menu">Menú elegido</label>
@@ -277,6 +286,14 @@
         }
 
         armarTira();
+
+        // Botón para pausar la tira (en celular no hay "mouse encima")
+        const botonPausa = document.querySelector('.tira-pausa');
+        botonPausa.addEventListener('click', () => {
+            const pausada = tira.classList.toggle('pausada');
+            botonPausa.setAttribute('aria-pressed', pausada);
+            botonPausa.querySelector('span').textContent = pausada ? 'Reanudar fotos' : 'Pausar fotos';
+        });
         let anchoAnterior = tira.clientWidth;
         let esperaResize;
         window.addEventListener('resize', () => {
@@ -308,6 +325,19 @@
         manana.setDate(manana.getDate() + 1);
         campoFecha.min = aTextoInput(manana);
 
+        // Revisa solo la fecha; se usa al cambiarla y al enviar
+        const errorFecha = document.getElementById('res-fecha-error');
+        function errorDeFecha() {
+            if (!campoFecha.value) return '';
+            if (campoFecha.value < campoFecha.min) return 'Las reservas se hacen con al menos 24 horas de anticipación.';
+            if (!DIAS_ABIERTO.includes(leerFecha(campoFecha.value).getDay())) return 'Ese día está cerrado. Abrimos de jueves a domingo.';
+            return '';
+        }
+        campoFecha.addEventListener('change', () => {
+            errorFecha.textContent = errorDeFecha();
+            campoFecha.setAttribute('aria-invalid', errorFecha.textContent ? 'true' : 'false');
+        });
+
         function validar() {
             const f = form.elements;
             if (!f.nombre.value.trim()) return ['Poné el nombre de la reserva.', f.nombre];
@@ -315,9 +345,8 @@
             if (!Number.isInteger(personas) || personas < 1) return ['Indicá cuántas personas son.', f.personas];
             if (personas > 25) return ['Para más de 25 personas, escribinos desde la sección Eventos.', f.personas];
             if (!campoFecha.value) return ['Elegí una fecha.', campoFecha];
-            const fecha = leerFecha(campoFecha.value);
-            if (campoFecha.value < campoFecha.min) return ['Las reservas se hacen con al menos 24 horas de anticipación.', campoFecha];
-            if (!DIAS_ABIERTO.includes(fecha.getDay())) return ['Ese día está cerrado. Abrimos de jueves a domingo.', campoFecha];
+            const problemaFecha = errorDeFecha();
+            if (problemaFecha) { errorFecha.textContent = problemaFecha; return ['Revisá la fecha.', campoFecha]; }
             return null;
         }
 

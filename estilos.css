@@ -19,13 +19,14 @@
 
   /* ---- Colores por función (el modo oscuro solo cambia estos) ------- */
   --fondo: var(--liquen);
-  --fondo-alterno: #dde3cf;      /* Reservas */
+  --fondo-alterno: #d8dfc8;      /* Reservas */
   --campo: #fbfcf7;              /* inputs del formulario */
   --texto: var(--corteza);
   --texto-suave: #5d5a4c;
   --texto-claro: #f1efe4;        /* texto sobre verdes */
   --acento-texto: var(--barro);  /* subtítulos sobre fondo claro */
   --linea: #c3c9b2;
+  --borde-campo: #737b65;        /* borde de inputs: contraste 3:1 */
 
   /* ---- Tipografía -----------------------------------------------------
      Caprasimo: gruesa y redonda, como letras pintadas en un cartel de
@@ -43,15 +44,16 @@
 /* ---- Modo oscuro (botón sol/luna; atributo data-tema en <html>) ---- */
 :root[data-tema="oscuro"] {
   color-scheme: dark;
-  --musgo: #1b2617;
-  --monte: #26331f;
-  --fondo: #141a12;
-  --fondo-alterno: #1b2318;
+  --musgo: #25331f;
+  --monte: #2e3d28;
+  --fondo: #10140e;
+  --fondo-alterno: #192016;
   --campo: #232d1f;
   --texto: #e7eadc;
   --texto-suave: #a9ad9a;
   --acento-texto: var(--arcilla);
   --linea: #34402d;
+  --borde-campo: #6e7863;
 }
 
 /* =====================================================================
@@ -157,6 +159,10 @@ section { scroll-margin-top: 4rem; }
 /* Contorno, para la acción secundaria sobre verde */
 .boton-linea { background: transparent; border-color: rgba(230, 185, 145, 0.6); color: var(--texto-claro); }
 .boton-linea:hover { background: rgba(230, 185, 145, 0.12); border-color: var(--arcilla); }
+
+/* Contorno de barro, sobre fondo claro */
+.boton-secundario { background: transparent; color: var(--acento-texto); border-color: var(--acento-texto); }
+.boton-secundario:hover { background: var(--acento-texto); color: var(--fondo); }
 
 /* Claro, sobre el verde de Contacto */
 .boton-claro { background: var(--arcilla); border-color: var(--arcilla); color: var(--corteza); }
@@ -278,9 +284,9 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
 }
 
 .inicio-lema {
-  font-family: var(--fuente-display);
-  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-  line-height: 1.2;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.3;
   margin-bottom: 0.6em;
 }
 
@@ -312,14 +318,14 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
 
 @media (max-width: 760px) {
   #inicio { grid-template-columns: 1fr; }
-  .horno { width: min(72%, 300px); justify-self: center; grid-row: 1; margin-top: 0.5rem; }
+  .horno { width: min(55%, 230px); justify-self: center; grid-row: 1; margin-top: 0.75rem; }
 }
 
 /* =====================================================================
    LA CARTA
    ===================================================================== */
 
-#carta { background: var(--fondo); }
+#platos { background: var(--fondo); }
 
 .platos {
   list-style: none;
@@ -331,17 +337,14 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
 }
 
 .platos li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
+  font-family: var(--fuente-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  line-height: 1.15;
   padding-block: 1.1rem;
   border-bottom: 1px solid var(--linea);
 }
 
-.plato { font-family: var(--fuente-display); font-size: clamp(1.35rem, 2.4vw, 1.7rem); line-height: 1.15; }
-.plato-detalle { font-style: italic; color: var(--texto-suave); }
+#platos .boton { margin-top: 2.25rem; }
 
 /* =====================================================================
    NOSOTROS
@@ -377,6 +380,35 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
    ===================================================================== */
 
 #galeria { background: var(--fondo); }
+
+.galeria-cabeza {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.tira-pausa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 500;
+  color: var(--texto);
+  background: transparent;
+  border: 1px solid var(--borde-campo);
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+.tira-pausa:hover { border-color: var(--acento-texto); color: var(--acento-texto); }
+.tira-pausa svg { width: 1rem; height: 1rem; fill: currentColor; }
+.tira-pausa .icono-play { display: none; }
+.tira-pausa[aria-pressed="true"] .icono-play { display: block; }
+.tira-pausa[aria-pressed="true"] .icono-pausa { display: none; }
+.tira.pausada .tira-pista { animation-play-state: paused; }
 
 /* La tira ocupa todo el ancho de la pantalla */
 .tira {
@@ -431,7 +463,7 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
   font: inherit;
   color: var(--texto);
   background: var(--campo);
-  border: 1px solid var(--linea);
+  border: 1px solid var(--borde-campo);
   border-radius: var(--radio);
   padding: 0.7em 0.85em;
 }
@@ -441,8 +473,10 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
 
 .form-reserva .ayuda { font-size: 0.9rem; color: var(--texto-suave); }
 
-.form-error { margin: 0; color: #b33a1f; font-weight: 700; }
-[data-tema="oscuro"] .form-error { color: #f2a487; }
+.form-error, .campo-error { margin: 0; color: #a3301a; font-weight: 700; }
+.campo-error { font-size: 0.9rem; }
+.campo-error:empty { display: none; }
+[data-tema="oscuro"] .form-error, [data-tema="oscuro"] .campo-error { color: #f2a487; }
 .form-error:empty { display: none; }
 
 #reservas .nota { margin: 1.75rem 0 0; color: var(--texto-suave); font-size: 0.95rem; }
@@ -455,10 +489,9 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
 
 .eventos-cuerpo {
   display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
   border-top: 1px solid var(--linea);
   padding-top: 1.75rem;
 }
@@ -515,6 +548,7 @@ footer p { margin: 0; }
   html { scroll-behavior: auto; }
   .horno img { animation: none; }
   .tira-pista { animation: none; }
+  .tira-pausa { display: none; }
   .tira { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   body, header, section, footer { transition: none; }
 }
