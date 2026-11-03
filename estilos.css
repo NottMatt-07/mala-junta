@@ -1,252 +1,234 @@
 /* =====================================================================
    MALA JUNTA — hoja de estilos
    =====================================================================
-   Para cambiar el aspecto del sitio, en general alcanza con tocar
-   las VARIABLES de acá abajo. El resto del archivo las usa a todas,
-   así que un solo cambio se refleja en toda la página.
+   Idea: la página se arma alrededor de la forma de la boca del horno
+   de barro (el arco de la foto principal). Todo lo demás queda sobrio:
+   verdes de monte, barro y un fondo color liquen.
+   Para cambiar colores, tocá las variables de :root.
    ===================================================================== */
 
 :root {
-  /* ---- Colores ------------------------------------------------------
-     Verde musgo y de bosque, barro cocido y crema: la paleta que pidió
-     el cliente, con los colores del horno de barro y la forestación. */
-  --color-musgo: #2f3b28;       /* verde musgo oscuro — header, inicio y contacto */
-  --color-bosque: #445939;      /* verde bosque — Nosotros y Reservas */
-  --color-brasa: #96502c;       /* barro cocido — acento principal y botones */
-  --color-barro-claro: #e0aa82; /* barro claro — acentos sobre fondos oscuros */
-  --color-humo: #2b211c;        /* marrón casi negro — texto y pie */
-  --color-masa: #efe6d8;        /* crema tipo masa cruda — fondo claro */
-  --color-cuero: #8b5e3c;       /* marrón cuero/madera — bordes y líneas */
+  /* ---- Paleta ------------------------------------------------------- */
+  --musgo: #26331f;        /* verde musgo profundo: header, inicio, contacto */
+  --monte: #364630;        /* verde monte: Nosotros */
+  --helecho: #7d9468;      /* verde helecho: detalles */
+  --barro: #9c5530;        /* barro cocido: botones y acentos */
+  --arcilla: #e6b991;      /* arcilla clara: títulos sobre fondos oscuros */
+  --corteza: #2a241f;      /* marrón corteza: texto y pie */
+  --liquen: #e9ecdf;       /* fondo claro, verde liquen muy pálido */
 
-  --color-texto: var(--color-humo);
-  --color-texto-claro: #f6f1e8;
+  /* ---- Colores por función (el modo oscuro solo cambia estos) ------- */
+  --fondo: var(--liquen);
+  --fondo-alterno: #dde3cf;      /* Reservas */
+  --campo: #fbfcf7;              /* inputs del formulario */
+  --texto: var(--corteza);
+  --texto-suave: #5d5a4c;
+  --texto-claro: #f1efe4;        /* texto sobre verdes */
+  --acento-texto: var(--barro);  /* subtítulos sobre fondo claro */
+  --linea: #c3c9b2;
 
-  /* ---- Colores "por función" -----------------------------------------
-     Las secciones claras usan estos. El modo oscuro solo los redefine
-     (ver más abajo), así no hay que tocar cada sección. */
-  --fondo: var(--color-masa);            /* fondo de Menú, Galería y Eventos */
-  --acento-texto: var(--color-brasa);    /* subtítulos y detalles sobre el fondo */
-  --linea: var(--color-cuero);           /* líneas divisorias */
-  --marco-fotos: var(--color-humo);      /* borde de las fotos de la galería */
+  /* ---- Tipografía -----------------------------------------------------
+     Caprasimo: gruesa y redonda, como letras pintadas en un cartel de
+     madera. Karla para leer cómodo. */
+  --fuente-display: 'Caprasimo', 'Cooper Black', Georgia, serif;
+  --fuente-texto: 'Karla', -apple-system, 'Segoe UI', sans-serif;
 
-  /* ---- Tipografías ---------------------------------------------------
-     Bitter (slab) para títulos: sólida, con carácter de cartel de
-     madera. Karla (sans) para el texto, para que se lea cómodo. */
-  --fuente-titulos: 'Bitter', Georgia, serif;
-  --fuente-texto: 'Karla', -apple-system, sans-serif;
-
-  /* ---- Espaciados ------------------------------------------------- */
-  --espacio-seccion: clamp(3rem, 6vw, 6rem);
-  --ancho-maximo: 1080px;
-  --radio-borde: 2px; /* casi sin curvas: onda rústica, no "app" */
+  /* ---- Medidas ------------------------------------------------------- */
+  --ancho: 1120px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --espacio-seccion: clamp(4rem, 9vw, 7rem);
+  --radio: 4px;
 }
 
-/* ---- Modo oscuro -------------------------------------------------------
-   Se activa con el botón sol/luna (atributo data-tema en <html>).
-   La primera vez se usa la preferencia del sistema de la persona. */
+/* ---- Modo oscuro (botón sol/luna; atributo data-tema en <html>) ---- */
 :root[data-tema="oscuro"] {
   color-scheme: dark;
-  --color-musgo: #243020;
-  --color-bosque: #33442b;
-  --color-texto: #ece3d3;
-  --fondo: #1a2016;
-  --acento-texto: var(--color-barro-claro);
-  --linea: #5a4636;
-  --marco-fotos: #0e120c;
+  --musgo: #1b2617;
+  --monte: #26331f;
+  --fondo: #141a12;
+  --fondo-alterno: #1b2318;
+  --campo: #232d1f;
+  --texto: #e7eadc;
+  --texto-suave: #a9ad9a;
+  --acento-texto: var(--arcilla);
+  --linea: #34402d;
 }
 
 /* =====================================================================
    BASE
    ===================================================================== */
 
-* {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: var(--fuente-texto);
-  color: var(--color-texto);
-  background: var(--fondo);
+  font-size: 1.0625rem;
   line-height: 1.6;
+  color: var(--texto);
+  background: var(--fondo);
+  overflow-x: clip; /* la galería ocupa todo el ancho */
 }
 
-/* Transición suave al cambiar de modo */
 body, header, section, footer {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3 {
-  font-family: var(--fuente-titulos);
-  line-height: 1.15;
-  margin: 0 0 0.6em 0;
-  color: var(--color-texto);
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  line-height: 1.02;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
-h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
-h3 { font-size: 1.15rem; letter-spacing: 0.02em; }
+h2 { font-size: clamp(2.3rem, 5.2vw, 3.6rem); }
 
-p {
-  margin: 0 0 1em 0;
-  max-width: 62ch; /* líneas cortas, más fáciles de leer */
+p { margin: 0 0 1em; max-width: 60ch; }
+
+a { color: inherit; text-underline-offset: 0.18em; }
+
+img { max-width: 100%; display: block; }
+
+:focus-visible { outline: 3px solid var(--acento-texto); outline-offset: 3px; }
+header :focus-visible, #inicio :focus-visible, #nosotros :focus-visible,
+#contacto :focus-visible, footer :focus-visible { outline-color: var(--arcilla); }
+
+.saltar {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 20;
+  background: var(--arcilla);
+  color: var(--corteza);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radio);
 }
+.saltar:focus { top: 1rem; }
 
-a {
-  color: inherit;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-ul {
-  padding-left: 1.2em;
-}
-
-/* Franja de contenido centrada, reutilizada por cada sección */
+/* Cada sección: fondo de lado a lado, contenido centrado al ancho máximo */
 section, footer {
-  padding: var(--espacio-seccion) 1.5rem;
+  padding-block: var(--espacio-seccion);
+  padding-inline: max(var(--gutter), calc((100% - var(--ancho)) / 2));
 }
 
-section > *, footer > * {
-  max-width: var(--ancho-maximo);
-  margin-left: auto;
-  margin-right: auto;
+section { scroll-margin-top: 4rem; }
+
+.seccion-cabeza { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.seccion-cabeza p { color: var(--texto-suave); font-size: 1.15rem; }
+
+/* Lista con raya de barro en lugar de viñeta */
+.lista-raya { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.6rem; }
+.lista-raya li { position: relative; padding-left: 1.6em; }
+.lista-raya li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.9em;
+  height: 2px;
+  background: var(--acento-texto);
 }
 
-:focus-visible {
-  outline: 3px solid var(--acento-texto);
-  outline-offset: 3px;
-}
+/* =====================================================================
+   BOTONES
+   ===================================================================== */
 
-header :focus-visible,
-#inicio :focus-visible,
-#nosotros :focus-visible,
-#reservas :focus-visible,
-#contacto :focus-visible,
-footer :focus-visible {
-  outline-color: var(--color-barro-claro);
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.85em 1.5em;
+  border: 2px solid var(--barro);
+  border-radius: var(--radio);
+  background: var(--barro);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
+.boton:hover { background: #81431f; border-color: #81431f; }
 
-/* Que el header fijo no tape el título al navegar con el menú */
-section {
-  scroll-margin-top: 4.5rem;
-}
+/* Contorno, para la acción secundaria sobre verde */
+.boton-linea { background: transparent; border-color: rgba(230, 185, 145, 0.6); color: var(--texto-claro); }
+.boton-linea:hover { background: rgba(230, 185, 145, 0.12); border-color: var(--arcilla); }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
+/* Claro, sobre el verde de Contacto */
+.boton-claro { background: var(--arcilla); border-color: var(--arcilla); color: var(--corteza); }
+.boton-claro:hover { background: #f0cdae; border-color: #f0cdae; }
 
 /* =====================================================================
    HEADER Y NAVEGACIÓN
    ===================================================================== */
 
 header {
-  background: var(--color-musgo);
-  color: var(--color-texto-claro);
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 3px solid var(--color-brasa);
+  background: var(--musgo);
+  color: var(--texto-claro);
+  border-bottom: 1px solid rgba(241, 239, 228, 0.1);
 }
 
-/* Título a la izquierda, links a la derecha, en una sola línea */
 .header-contenido {
-  max-width: var(--ancho-maximo);
+  max-width: calc(var(--ancho) + 2 * var(--gutter));
   margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  padding: 0.7rem var(--gutter);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
+  gap: 0.5rem 1.75rem;
 }
 
-header h1 {
-  color: var(--color-texto-claro);
-  font-size: 1.4rem;
-  margin: 0 auto 0 0; /* empuja todo lo demás a la derecha */
+.marca {
+  font-family: var(--fuente-display);
+  font-size: 1.5rem;
+  color: var(--arcilla);
+  text-decoration: none;
+  margin-right: auto;
 }
 
-/* Orden en pantalla: título | links | sol/luna | hamburguesa */
 nav { order: 1; }
 .tema-toggle { order: 2; }
 .menu-toggle { order: 3; }
 
-/* ---- Botón sol / luna -------------------------------------------- */
-.tema-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  background: none;
-  color: var(--color-texto-claro);
-  border: 2px solid rgba(246, 241, 232, 0.35);
-  border-radius: var(--radio-borde);
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.tema-toggle:hover {
-  border-color: var(--color-barro-claro);
-  color: var(--color-barro-claro);
-}
-
-.tema-toggle svg {
-  width: 1.3rem;
-  height: 1.3rem;
-}
-
-/* Modo claro muestra la luna (para pasar a oscuro); modo oscuro, el sol */
-.tema-toggle .icono-sol { display: none; }
-[data-tema="oscuro"] .tema-toggle .icono-sol { display: block; }
-[data-tema="oscuro"] .tema-toggle .icono-luna { display: none; }
-
-nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
+nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.6rem; margin: 0; padding: 0; }
 
 nav a {
   text-decoration: none;
   font-weight: 500;
-  padding-bottom: 0.2em;
+  padding-block: 0.3em;
   border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
+nav a:hover, nav a:focus-visible { border-color: var(--arcilla); color: var(--arcilla); }
 
-nav a:hover,
-nav a:focus-visible {
-  border-color: var(--color-barro-claro);
-}
-
-/* ---- Botón hamburguesa (solo en pantallas chicas) ---------------- */
-.menu-toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
+.tema-toggle, .menu-toggle {
   width: 2.75rem;
   height: 2.75rem;
   padding: 0;
+  align-items: center;
+  justify-content: center;
   background: none;
-  color: var(--color-texto-claro);
-  border: 2px solid rgba(246, 241, 232, 0.35);
-  border-radius: var(--radio-borde);
+  color: var(--texto-claro);
+  border: 1px solid rgba(241, 239, 228, 0.3);
+  border-radius: var(--radio);
   cursor: pointer;
 }
+.tema-toggle { display: flex; }
+.tema-toggle:hover { border-color: var(--arcilla); color: var(--arcilla); }
+.tema-toggle svg { width: 1.25rem; height: 1.25rem; }
+.tema-toggle .icono-sol { display: none; }
+[data-tema="oscuro"] .tema-toggle .icono-sol { display: block; }
+[data-tema="oscuro"] .tema-toggle .icono-luna { display: none; }
 
-/* Las 3 rayitas: el span es la del medio, ::before y ::after las otras */
+/* Hamburguesa: 3 rayitas que se vuelven X */
+.menu-toggle { display: none; }
 .menu-toggle-icono,
 .menu-toggle-icono::before,
 .menu-toggle-icono::after {
@@ -256,207 +238,153 @@ nav a:focus-visible {
   background: currentColor;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
-
 .menu-toggle-icono { position: relative; }
-
 .menu-toggle-icono::before,
-.menu-toggle-icono::after {
-  content: "";
-  position: absolute;
-  left: 0;
-}
-
+.menu-toggle-icono::after { content: ""; position: absolute; left: 0; }
 .menu-toggle-icono::before { top: -6px; }
 .menu-toggle-icono::after  { top: 6px; }
-
-/* Abierto: las rayitas forman una X */
 header.menu-abierto .menu-toggle-icono { background: transparent; }
 header.menu-abierto .menu-toggle-icono::before { top: 0; transform: rotate(45deg); }
 header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45deg); }
 
-@media (max-width: 700px) {
-  /* Solo si hay JavaScript: sin JS, los links se siguen viendo normal */
+@media (max-width: 760px) {
   .js .menu-toggle { display: flex; }
-  .js nav { display: none; width: 100%; order: 4; } /* abajo de todo, ancho completo */
+  .js nav { display: none; width: 100%; order: 4; }
   .js header.menu-abierto nav { display: block; }
-
-  .js nav ul {
-    flex-direction: column;
-    gap: 0;
-    padding: 0.25rem 0 0.5rem;
-  }
-
-  .js nav a {
-    display: block;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(246, 241, 232, 0.12);
-  }
+  .js nav ul { flex-direction: column; gap: 0; padding: 0.25rem 0 0.75rem; }
+  .js nav a { display: block; padding: 0.8rem 0; border-bottom: 1px solid rgba(241, 239, 228, 0.12); }
 }
 
 /* =====================================================================
-   INICIO (HERO)
+   INICIO: nombre grande y la foto con forma de horno de barro
    ===================================================================== */
 
 #inicio {
-  /* Foto del horno con una capa oscura encima para que el texto se lea */
-  background:
-    linear-gradient(rgba(24, 32, 20, 0.55), rgba(24, 32, 20, 0.82)),
-    url("foto3.jpg") center / cover no-repeat;
-  color: var(--color-texto-claro);
-  text-align: center;
-  padding-top: clamp(5rem, 14vw, 10rem);
-  padding-bottom: clamp(5rem, 14vw, 10rem);
-}
-
-#inicio h2 {
-  color: var(--color-texto-claro);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-}
-
-#inicio p {
-  margin: 0 auto;
-  font-size: 1.2rem;
-  color: var(--color-masa);
-}
-
-#inicio .inicio-bajada {
-  font-family: var(--fuente-titulos);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-barro-claro);
-  margin-bottom: 1rem;
-}
-
-/* ---- Botón de reserva (se usa en Inicio y Contacto) -------------- */
-.boton {
-  display: inline-flex;
+  background: var(--musgo);
+  color: var(--texto-claro);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
-  gap: 0.6em;
-  margin-top: 1.8rem;
-  padding: 0.85em 1.5em;
-  background: var(--color-brasa);
-  border: none;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: var(--radio-borde);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding-block: clamp(3rem, 8vw, 6rem);
 }
 
-.boton:hover {
-  background: #7a4024;
-  transform: translateY(-1px);
+#inicio h1 {
+  font-size: clamp(4rem, 12vw, 8.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--arcilla);
+  margin-bottom: 0.3em;
 }
 
-/* Variante clara, para fondos verdes */
-.boton-claro {
-  background: var(--color-masa);
-  color: var(--color-musgo);
+.inicio-lema {
+  font-family: var(--fuente-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
+  margin-bottom: 0.6em;
 }
 
-.boton-claro:hover {
-  background: #fff;
+#inicio p { color: rgba(241, 239, 228, 0.85); }
+
+.inicio-acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 1.5rem; }
+
+#inicio .inicio-horario { font-size: 0.95rem; color: rgba(241, 239, 228, 0.65); margin: 0; }
+
+/* La boca del horno: arco de medio punto arriba, recto abajo.
+   Con proporción 4:5, el radio horizontal (50%) equivale al 40% del alto. */
+.horno {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  max-width: 100%;
+  border-radius: 50% 50% var(--radio) var(--radio) / 40% 40% var(--radio) var(--radio);
+  overflow: hidden;
+  outline: 2px solid rgba(230, 185, 145, 0.55); /* el borde de barro del horno */
+  outline-offset: 10px;
+}
+/* La animación va en la foto y no en el marco, así el borde no se recorta */
+.horno img { width: 100%; height: 100%; object-fit: cover; animation: asomar 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* Único movimiento al cargar: la foto sube como el fuego dentro del horno */
+@keyframes asomar {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
 }
 
-.boton svg {
-  width: 1.2em;
-  height: 1.2em;
-  fill: currentColor;
+@media (max-width: 760px) {
+  #inicio { grid-template-columns: 1fr; }
+  .horno { width: min(72%, 300px); justify-self: center; grid-row: 1; margin-top: 0.5rem; }
 }
 
 /* =====================================================================
-   MENÚ
+   LA CARTA
    ===================================================================== */
 
-#menu {
-  background: var(--fondo);
+#carta { background: var(--fondo); }
+
+.platos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  column-gap: clamp(2rem, 6vw, 5rem);
 }
 
-#menu h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-#menu > div {
-  border-top: 1px solid var(--linea);
-  padding: 1.5rem 0;
-}
-
-#menu > div:last-of-type {
+.platos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding-block: 1.1rem;
   border-bottom: 1px solid var(--linea);
 }
 
-#menu h3 {
-  color: var(--acento-texto);
-  text-transform: lowercase;
-}
-
-#menu p {
-  max-width: none;
-}
+.plato { font-family: var(--fuente-display); font-size: clamp(1.35rem, 2.4vw, 1.7rem); line-height: 1.15; }
+.plato-detalle { font-style: italic; color: var(--texto-suave); }
 
 /* =====================================================================
    NOSOTROS
    ===================================================================== */
 
 #nosotros {
-  background: var(--color-bosque);
-  color: var(--color-texto-claro);
-}
-
-#nosotros h2,
-#nosotros h3 {
-  color: var(--color-texto-claro);
-}
-
-#nosotros ul {
-  list-style: none;
-  padding: 0;
+  background: var(--monte);
+  color: var(--texto-claro);
   display: grid;
-  gap: 0.6rem;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
 }
 
-#nosotros li {
-  padding-left: 1.4em;
-  position: relative;
+.declaracion {
+  font-family: var(--fuente-display);
+  font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+  line-height: 1.05;
+  color: var(--arcilla);
+  margin: 0;
+  text-wrap: balance;
 }
 
-#nosotros li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--color-barro-claro);
+#nosotros h2 { font-size: 1.6rem; color: var(--texto-claro); }
+#nosotros .lista-raya li::before { background: var(--arcilla); }
+
+@media (max-width: 760px) {
+  #nosotros { grid-template-columns: 1fr; }
 }
 
 /* =====================================================================
-   GALERÍA
+   GALERÍA: tira de fotos que se desliza en loop
    ===================================================================== */
 
-#galeria {
-  background: var(--fondo);
-}
+#galeria { background: var(--fondo); }
 
-#galeria h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* ---- Tira de fotos que se desliza en loop ------------------------
-   El JavaScript duplica las fotos; la animación mueve la tira la mitad
-   de su ancho y vuelve a empezar sin que se note el corte. */
+/* La tira ocupa todo el ancho de la pantalla */
 .tira {
-  max-width: none;
-  margin-left: -1.5rem;   /* ocupa todo el ancho de la pantalla */
-  margin-right: -1.5rem;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   overflow: hidden;
-  /* bordes que se desvanecen a los costados */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
 }
 
 .tira-pista {
@@ -464,213 +392,129 @@ header.menu-abierto .menu-toggle-icono::after  { top: 0; transform: rotate(-45de
   width: max-content;
   animation: deslizar var(--duracion, 40s) linear infinite;
 }
-
-.tira:hover .tira-pista {
-  animation-play-state: paused;
-}
+.tira:hover .tira-pista { animation-play-state: paused; }
 
 .tira-pista img {
   flex: none;
-  height: clamp(200px, 24vw, 300px);
+  height: clamp(220px, 26vw, 340px);
   width: auto;
   max-width: none;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  margin-right: 1rem; /* margen y no "gap": así las dos mitades miden exacto lo mismo */
-  border: 3px solid var(--marco-fotos);
+  margin-right: 1rem; /* margen y no "gap": las dos mitades miden exacto lo mismo */
+  border-radius: var(--radio);
 }
 
-@keyframes deslizar {
-  to { transform: translateX(-50%); }
-}
-
-/* Si la persona pidió menos animaciones: tira quieta, se desliza a mano */
-@media (prefers-reduced-motion: reduce) {
-  .tira-pista { animation: none; }
-  .tira {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
+@keyframes deslizar { to { transform: translateX(-50%); } }
 
 /* =====================================================================
    RESERVAS
    ===================================================================== */
 
-#reservas {
-  background: var(--color-bosque);
-  color: var(--color-texto-claro);
-}
+#reservas { background: var(--fondo-alterno); }
 
-#reservas h2 {
-  color: var(--color-texto-claro);
-}
-
-.form-reserva {
-  display: grid;
-  gap: 1.1rem 1.5rem;
-  margin-top: 1.5rem;
-}
+.form-reserva { display: grid; gap: 1.25rem 1.5rem; max-width: 820px; }
 
 @media (min-width: 700px) {
   .form-reserva { grid-template-columns: 1fr 1fr; }
 }
 
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
+.campo { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.campo-ancho { grid-column: 1 / -1; }
 
-.campo-ancho {
-  grid-column: 1 / -1;
-}
-
-.form-reserva label {
-  font-weight: 700;
-}
-
-.form-reserva .opcional {
-  font-weight: 400;
-  opacity: 0.8;
-}
+.form-reserva label { font-weight: 700; }
+.form-reserva .opcional { font-weight: 400; color: var(--texto-suave); }
 
 .form-reserva input,
 .form-reserva textarea {
-  font: inherit;
-  color: var(--color-humo);
-  background: #fbf8f2;
-  border: 2px solid transparent;
-  border-radius: var(--radio-borde);
-  padding: 0.65em 0.8em;
   width: 100%;
+  font: inherit;
+  color: var(--texto);
+  background: var(--campo);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 0.7em 0.85em;
 }
-
 .form-reserva input:focus,
-.form-reserva textarea:focus {
-  border-color: var(--color-barro-claro);
-}
+.form-reserva textarea:focus { border-color: var(--acento-texto); outline: 2px solid var(--acento-texto); outline-offset: 0; }
+.form-reserva textarea { resize: vertical; }
 
-.form-reserva textarea {
-  resize: vertical;
-}
+.form-reserva .ayuda { font-size: 0.9rem; color: var(--texto-suave); }
 
-.form-reserva .ayuda {
-  font-size: 0.9rem;
-  opacity: 0.85;
-}
+.form-error { margin: 0; color: #b33a1f; font-weight: 700; }
+[data-tema="oscuro"] .form-error { color: #f2a487; }
+.form-error:empty { display: none; }
 
-.form-reserva .boton {
-  margin-top: 0.25rem;
-}
-
-.form-error {
-  margin: 0;
-  color: #ffd2b8;
-  font-weight: 700;
-}
-
-.form-error:empty {
-  display: none;
-}
-
-#reservas .nota {
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  opacity: 0.85;
-}
+#reservas .nota { margin: 1.75rem 0 0; color: var(--texto-suave); font-size: 0.95rem; }
 
 /* =====================================================================
    EVENTOS
    ===================================================================== */
 
-#eventos {
-  background: var(--fondo);
-}
+#eventos { background: var(--fondo); }
 
-#eventos ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 0.5rem;
-  margin: 0 auto 1.2rem;
+.eventos-cuerpo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  border-top: 1px solid var(--linea);
+  padding-top: 1.75rem;
 }
-
-#eventos li {
-  padding-left: 1.4em;
-  position: relative;
-}
-
-#eventos li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--acento-texto);
-}
+.eventos-cuerpo .lista-raya { margin: 0; font-size: 1.15rem; }
 
 /* =====================================================================
    CONTACTO
    ===================================================================== */
 
-#contacto {
-  background: var(--color-musgo);
-  color: var(--color-texto-claro);
-}
+#contacto { background: var(--musgo); color: var(--texto-claro); }
+#contacto h2 { color: var(--arcilla); }
 
-#contacto h2,
-#contacto h3 {
-  color: var(--color-texto-claro);
-}
+.contacto-grilla { display: grid; gap: 2.5rem; align-items: start; }
 
-#contacto h3 {
-  color: var(--color-barro-claro);
-  margin-top: 1.2em;
-}
-
-#contacto h3:first-of-type {
-  margin-top: 0;
-}
-
-#contacto a:not(.boton) {
-  text-decoration-color: var(--color-barro-claro);
-  text-underline-offset: 0.2em;
-}
-
-/* Datos a la izquierda, mapa a la derecha (abajo en celular) */
-.contacto-grilla {
-  display: grid;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (min-width: 800px) {
+@media (min-width: 820px) {
   .contacto-grilla { grid-template-columns: 1fr 1fr; }
 }
+
+.datos { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.75rem 2rem; }
+.datos dt { font-weight: 700; color: var(--arcilla); margin-bottom: 0.2rem; }
+.datos dd { margin: 0; font-size: 1.1rem; }
+.datos .boton { grid-column: 1 / -1; justify-self: start; }
 
 .mapa {
   width: 100%;
   aspect-ratio: 4 / 3;
-  border: 3px solid var(--color-cuero);
+  border: 0;
+  border-radius: var(--radio);
   display: block;
 }
 
 /* =====================================================================
-   FOOTER
+   PIE
    ===================================================================== */
 
 footer {
-  background: var(--color-humo);
-  color: var(--color-texto-claro);
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
+  background: var(--corteza);
+  color: rgba(241, 239, 228, 0.7);
+  padding-block: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
 }
+footer p { margin: 0; }
+.footer-marca { font-family: var(--fuente-display); font-size: 1.6rem; color: var(--arcilla); }
 
-footer p {
-  margin-bottom: 0.4em;
-}
+/* =====================================================================
+   MENOS MOVIMIENTO
+   ===================================================================== */
 
-footer a {
-  text-underline-offset: 0.2em;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .horno img { animation: none; }
+  .tira-pista { animation: none; }
+  .tira { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  body, header, section, footer { transition: none; }
 }

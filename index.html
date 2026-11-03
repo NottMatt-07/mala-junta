@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mala Junta — Cocina y fuegos</title>
     <meta name="description" content="Mala Junta: cocina y fuegos en San Martín de los Andes. Carnes al horno de barro y a la parrilla, con reserva previa.">
-    <meta name="theme-color" content="#2f3b28">
+    <meta name="theme-color" content="#26331f">
 
     <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
     <meta property="og:type" content="website">
@@ -15,11 +15,11 @@
          WhatsApp y Facebook no leen rutas relativas. -->
     <meta property="og:image" content="foto3.jpg">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%232f3b28'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23e0aa82'%3EMJ%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%2326331f'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23e6b991'%3EMJ%3C/text%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
     <script>
         // Va en el <head> para aplicar el tema antes de dibujar la página (sin "parpadeo")
@@ -36,9 +36,11 @@
     <!-- TODO WHATSAPP: el número de ejemplo 5490000000000 aparece en este archivo
          (links y constante WHATSAPP del script). Buscar y reemplazar todos por el real:
          549 + característica sin 0 + número sin 15. Ej: 5492972123456 -->
+    <a class="saltar" href="#carta">Saltar al contenido</a>
+
     <header>
         <div class="header-contenido">
-            <h1>Mala Junta</h1>
+            <a class="marca" href="#inicio">Mala Junta</a>
             <button class="tema-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false">
                 <svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
                 <svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
@@ -48,8 +50,7 @@
             </button>
             <nav id="nav-principal">
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#carta">Carta</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#galeria">Galería</a></li>
                     <li><a href="#reservas">Reservas</a></li>
@@ -60,41 +61,52 @@
         </div>
     </header>
 
+    <main>
     <section id="inicio">
-        <p class="inicio-bajada">Cocina y fuegos · San Martín de los Andes</p>
-        <h2>Horno de barro y parrilla</h2>
-        <p>Cocina patagónica a la leña, con reserva previa.</p>
-        <a class="boton" href="#reservas">Reservá tu mesa</a>
+        <div class="inicio-texto">
+            <h1>Mala Junta</h1>
+            <p class="inicio-lema">Cocina a la leña en San Martín de los Andes.</p>
+            <p>Carnes al horno de barro y a la parrilla, en un salón chico para 25 personas. Se come con reserva.</p>
+            <div class="inicio-acciones">
+                <a class="boton" href="#reservas">Reservá tu mesa</a>
+                <a class="boton boton-linea" href="#carta">Ver la carta</a>
+            </div>
+            <p class="inicio-horario">Abrimos jueves, viernes y sábado a la noche, y domingo al mediodía.</p>
+        </div>
+        <!-- La foto va recortada con la forma de la boca del horno de barro -->
+        <figure class="horno">
+            <img src="foto3.jpg" alt="Carne asándose dentro del horno de barro, con el fuego al fondo">
+        </figure>
     </section>
 
-    <section id="menu">
-        <h2>Menú</h2>
-        <div>
-            <h3>platos principales</h3>
-            <p>descripcion</p>
-            <p>precio ejemplo</p>
+    <section id="carta">
+        <div class="seccion-cabeza">
+            <h2>La carta</h2>
+            <p>Te mandamos la carta completa por WhatsApp cuando reservás. Estos son algunos de los platos que más se piden.</p>
         </div>
-        <div>
-            <h3>postres</h3>
-            <p>descripcion</p>
-            <p>precio ejemplo</p>
-        </div>
+        <!-- TODO: platos tomados de reseñas de TripAdvisor. Reemplazar con la carta real de Juan. -->
+        <ul class="platos">
+            <li><span class="plato">Cordero patagónico</span><span class="plato-detalle">al horno de barro</span></li>
+            <li><span class="plato">Bondiola braseada</span><span class="plato-detalle">cocción lenta</span></li>
+            <li><span class="plato">Vacío</span><span class="plato-detalle">a la parrilla</span></li>
+            <li><span class="plato">Ojo de bife</span><span class="plato-detalle">a la parrilla</span></li>
+            <li><span class="plato">Matambre de cerdo</span><span class="plato-detalle">a la leña</span></li>
+            <li><span class="plato">Postres tradicionales</span><span class="plato-detalle">caseros</span></li>
+        </ul>
     </section>
 
     <section id="nosotros">
-        <h2>Nosotros</h2>
-        <h3>¿Quiénes Somos?</h3>
-        <p>Restaurante patagónico de cocina a la leña: casi todo lo que servimos pasa por el horno de barro o la parrilla. Un lugar chico e íntimo, con capacidad para 25 personas.</p>
-        <p>Reserva previa con 24 horas de anticipación. Pago en efectivo o transferencia bancaria.</p>
-        <h3>Lo que vas a encontrar</h3>
-        <ul>
-            <li>Carnes al horno de barro y a la parrilla</li>
-            <li>Postres tradicionales</li>
-            <li>Opciones para restricciones alimentarias (consultanos)</li>
-            <li>La bodega: un espacio más privado, sin costo extra</li>
-        </ul>
-        <h3>Cabañas Chapapituca</h3>
-        <p>Junto a las cabañas <a href="https://www.instagram.com/chapapituca/" target="_blank" rel="noopener">@chapapituca</a>.</p>
+        <p class="declaracion">Un horno de barro, una parrilla y lugar para veinticinco.</p>
+        <div class="nosotros-texto">
+            <h2>Nosotros</h2>
+            <p>Restaurante patagónico de cocina a la leña: casi todo lo que servimos pasa por el horno de barro o la parrilla.</p>
+            <p>Reservamos con 24 horas de anticipación. No pedimos seña. Se paga en efectivo o por transferencia.</p>
+            <ul class="lista-raya">
+                <li>Opciones para restricciones alimentarias, consultanos al reservar.</li>
+                <li>La bodega: un espacio más privado para 12 personas, sin costo extra.</li>
+                <li>Junto a las cabañas <a href="https://www.instagram.com/chapapituca/" target="_blank" rel="noopener">Chapapituca</a>.</li>
+            </ul>
+        </div>
     </section>
 
     <section id="galeria">
@@ -102,38 +114,40 @@
         <div class="tira" role="region" aria-label="Fotos de Mala Junta">
             <!-- Para sumar fotos: agregar otro <img> dentro de .tira-pista. El loop se arma solo. -->
             <div class="tira-pista">
-                <img src="foto3.jpg" alt="Carne asándose en el horno de barro">
                 <img src="foto4.jpg" alt="Cazuela gratinada servida en plato de loza">
                 <img src="foto1.jpg" alt="Galpón con el horno de barro humeando">
                 <img src="foto5.jpg" alt="Carne a la parrilla en fuente de madera, con ensalada">
                 <img src="foto2.jpg" alt="Mesa puesta con copas y pan casero">
                 <img src="foto6.jpg" alt="Bife a la parrilla con ensalada sobre tabla de madera">
+                <img src="foto3.jpg" alt="Carne asándose en el horno de barro">
                 <img src="foto7.jpg" alt="Postre de chocolate con helado y salsa de frutos rojos">
             </div>
         </div>
     </section>
 
     <section id="reservas">
-        <h2>Reservas</h2>
-        <p>Completá tus datos y se abre WhatsApp con el mensaje listo para enviar. Reservamos con al menos 24 horas de anticipación.</p>
+        <div class="seccion-cabeza">
+            <h2>Reservá tu mesa</h2>
+            <p>Completá los datos y se abre WhatsApp con el mensaje listo. Reservamos con al menos 24 horas de anticipación.</p>
+        </div>
         <form class="form-reserva" novalidate>
             <div class="campo">
                 <label for="res-nombre">Nombre de la reserva</label>
                 <input id="res-nombre" name="nombre" type="text" autocomplete="name" required>
             </div>
             <div class="campo">
-                <label for="res-personas">Cantidad de personas</label>
+                <label for="res-personas">Personas</label>
                 <input id="res-personas" name="personas" type="number" min="1" max="25" value="2" required>
             </div>
             <div class="campo">
                 <label for="res-fecha">Fecha</label>
                 <input id="res-fecha" name="fecha" type="date" required aria-describedby="res-fecha-ayuda">
-                <span class="ayuda" id="res-fecha-ayuda">Jueves, viernes y sábado a la noche · Domingo al mediodía</span>
+                <span class="ayuda" id="res-fecha-ayuda">Jueves a sábado a la noche, domingo al mediodía</span>
             </div>
             <div class="campo">
                 <label for="res-menu">Menú elegido</label>
                 <input id="res-menu" name="menu" type="text" aria-describedby="res-menu-ayuda">
-                <span class="ayuda" id="res-menu-ayuda">¿No tenés la carta? Dejalo vacío y te la mandamos por WhatsApp.</span>
+                <span class="ayuda" id="res-menu-ayuda">Si todavía no tenés la carta, dejalo vacío y te la mandamos.</span>
             </div>
             <div class="campo campo-ancho">
                 <label for="res-comentarios">Comentarios <span class="opcional">(opcional)</span></label>
@@ -141,60 +155,63 @@
             </div>
             <p class="form-error campo-ancho" role="alert"></p>
             <div class="campo-ancho">
-                <button class="boton boton-claro" type="submit">Enviar reserva por WhatsApp</button>
+                <button class="boton" type="submit">Enviar reserva por WhatsApp</button>
             </div>
         </form>
-        <p class="nota">Sin reserva te recibimos si hay lugar, pero siempre tienen prioridad las reservas.</p>
+        <p class="nota">Sin reserva te recibimos si hay lugar, pero las reservas tienen prioridad.</p>
     </section>
 
     <section id="eventos">
-        <h2>Eventos</h2>
-        <p>¿Un agasajo, una reunión de empresa o un cumpleaños? Lo organizamos a medida en nuestro espacio.</p>
-        <ul>
-            <li>Agasajos y festejos</li>
-            <li>Reuniones empresariales</li>
-            <li>Cumpleaños (no realizamos fiestas de 15)</li>
-        </ul>
-        <p>Para eventos pedimos al menos una semana de anticipación. Escribinos y lo coordinamos directamente.</p>
-        <div>
-            <a class="boton" href="https://wa.me/5490000000000?text=Hola!%20Quiero%20consultar%20por%20un%20evento%20en%20Mala%20Junta" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
-                Consultar por un evento
-            </a>
+        <div class="seccion-cabeza">
+            <h2>Eventos</h2>
+            <p>Agasajos, reuniones de empresa y cumpleaños, organizados a medida. Pedimos una semana de anticipación y lo coordinamos directamente por WhatsApp.</p>
+        </div>
+        <div class="eventos-cuerpo">
+            <ul class="lista-raya">
+                <li>Agasajos y festejos</li>
+                <li>Reuniones empresariales</li>
+                <li>Cumpleaños (no hacemos fiestas de 15)</li>
+            </ul>
+            <a class="boton" href="https://wa.me/5490000000000?text=Hola!%20Quiero%20consultar%20por%20un%20evento%20en%20Mala%20Junta" target="_blank" rel="noopener">Consultar por un evento</a>
         </div>
     </section>
 
     <section id="contacto">
-        <h2>Contacto</h2>
+        <h2>Cómo llegar</h2>
         <div class="contacto-grilla">
-            <div>
-                <h3>Ubicación</h3>
-                <!-- TODO: dirección real (también en el link y en el mapa de abajo) -->
-                <p><a href="https://www.google.com/maps/search/?api=1&query=San%20Mart%C3%ADn%20de%20los%20Andes%2C%20Neuqu%C3%A9n" target="_blank" rel="noopener">Calle Principal 123, Ciudad</a></p>
-                <h3>Teléfono</h3>
-                <!-- TODO: teléfono real -->
-                <p><a href="tel:+541123456789">+54 11 2345-6789</a></p>
-                <h3>Horario</h3>
-                <p>Jueves, viernes y sábado: 19:30 a 01:00</p>
-                <!-- TODO: confirmar horario del domingo -->
-                <p>Domingo: al mediodía</p>
-                <h3>Redes</h3>
-                <p><a href="https://www.instagram.com/malajunta.cocina/" target="_blank" rel="noopener">Instagram @malajunta.cocina</a></p>
-                <a class="boton boton-claro" href="https://wa.me/5490000000000?text=Hola!" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
-                    Escribinos por WhatsApp
-                </a>
-            </div>
+            <dl class="datos">
+                <div>
+                    <dt>Dirección</dt>
+                    <!-- TODO: dirección real (también en el link y en el mapa) -->
+                    <dd><a href="https://www.google.com/maps/search/?api=1&query=San%20Mart%C3%ADn%20de%20los%20Andes%2C%20Neuqu%C3%A9n" target="_blank" rel="noopener">Calle Principal 123, Ciudad</a></dd>
+                </div>
+                <div>
+                    <dt>Horario</dt>
+                    <!-- TODO: confirmar horario del domingo -->
+                    <dd>Jueves a sábado, 19:30 a 01:00<br>Domingo, al mediodía</dd>
+                </div>
+                <div>
+                    <dt>Teléfono</dt>
+                    <!-- TODO: teléfono real -->
+                    <dd><a href="tel:+541123456789">+54 11 2345-6789</a></dd>
+                </div>
+                <div>
+                    <dt>Instagram</dt>
+                    <dd><a href="https://www.instagram.com/malajunta.cocina/" target="_blank" rel="noopener">@malajunta.cocina</a></dd>
+                </div>
+                <a class="boton boton-claro" href="https://wa.me/5490000000000?text=Hola!" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+            </dl>
             <!-- TODO: cuando esté la dirección, cambiar el q= por la dirección exacta -->
             <iframe class="mapa" title="Mapa de ubicación de Mala Junta"
                 src="https://www.google.com/maps?q=San%20Mart%C3%ADn%20de%20los%20Andes%2C%20Neuqu%C3%A9n&output=embed"
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Mala Junta. Todos los derechos reservados.</p>
-        <p><a href="https://www.instagram.com/malajunta.cocina/" target="_blank" rel="noopener">@malajunta.cocina</a></p>
+        <p class="footer-marca">Mala Junta</p>
+        <p>Cocina a la leña, San Martín de los Andes. &copy; 2026</p>
     </footer>
 
     <script>
